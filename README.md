@@ -1,4 +1,5 @@
-# CARPUC
+![logo.png](docs/arts/logo.png)
+# PUCAR
 
 ## Equipe
 
