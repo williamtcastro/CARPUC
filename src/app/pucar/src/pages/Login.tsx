@@ -16,10 +16,6 @@ function handleSubmit(data: ILogin) {
   alert(data.password);
 }
 
-function handleLink() {
-  return <Link to="/logon"></Link>;
-}
-
 const Login: React.FC = () => {
   return (
     <div id="page-login">
