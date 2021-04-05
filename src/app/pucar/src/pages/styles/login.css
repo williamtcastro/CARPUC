@@ -1,0 +1,112 @@
+#page-login {
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../../assets/img/bg.jpg");
+
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+
+#page-login .content-wrapper {
+    width: 100%;
+    max-width: 1100px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.content-wrapper .content-block {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    height: 55%;
+    width: 95%;
+    border-radius: 2rem;
+    padding: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.logo-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+}
+
+.logo-wrapper .logo {
+    width: 90%;
+    height: auto;
+}
+
+.custom-button-login {
+    margin-top: 1.5rem;
+    width: 80%;
+    background-color: #1B98E0;
+    height: 6rem;
+    border-radius: 15px;
+    font-weight: bold;
+    color: #fff;
+    font-size: 2rem;
+} 
+
+.custom-button-logon {
+    margin-top: 1.5rem;
+    width: 60%;
+    height: 4rem;
+    display: flex;
+    border-radius: 15px;
+    font-weight: bold;
+    color: #006494;
+    font-size: 1.4rem;
+    justify-content: center;
+    align-items: center;
+} 
+
+.form-style {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 720px){
+    #page-login {
+        background-image: url("../../assets/img/bg-mobile.jpg");
+    }
+
+    #page-login .content-wrapper {
+        justify-content: center;
+    }
+
+    .content-wrapper .content-block {
+        margin-top: 0;
+        flex: 1;
+        height: 100%;
+        bottom: 0;
+        width: 100%;
+        border-radius: 2rem 2rem 0 0;
+    }
+    
+    .logo-wrapper {
+        display: flex;
+        flex: 1;
+        max-height: 40%;
+        padding: 1rem;
+        justify-content: baseline;
+        width: 100%;
+    }
+    
+    .logo-wrapper .logo {
+        width: 70%;
+        height: auto;
+    }
+}

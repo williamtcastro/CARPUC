@@ -11,7 +11,7 @@
 
 ## 1. Visão
 
-O problema da pouca flexibilidade de horários dos ônibus, vem afetando no tempo de espera os alunos que não possuem veículos para se locomover. Impactando assim no custo mensal do aluno para locomoção, pois a solução seria solicitar um veículo por aplicativos, tendo em vista que o custo dessa solicitação seria alto, referente ao custo urbano. Neste contexto, uma solução de sucesso resultaria em custo baixo para locomoção além de o tempo de espera reduzido, trazendo agilidade e segurança, beneficiando também o condutor, criando uma renda mensal para auxiliar no gasto.
+O problema da pouca flexibilidade de horários dos ônibus, vem afetando no tempo de espera dos alunos que não possuem veículos para se locomover. Impactando assim no custo mensal do aluno para locomoção, pois a solução seria solicitar um veículo por aplicativos, tendo em vista que o custo dessa solicitação seria alto, referente ao custo urbano. Neste contexto, uma solução de sucesso resultaria em custo baixo para locomoção além de o tempo de espera reduzido, trazendo agilidade e segurança, beneficiando também o condutor, criando uma renda mensal para auxiliar no gasto.
 
 ## 2. Envolvidos
 

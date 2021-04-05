@@ -1,0 +1,13 @@
+.login {
+    height: 6rem;
+    border: 3px #1B98E0 solid;
+    margin: 0.5rem;
+    border-radius:  15px;
+    background-color: #fff;
+    padding: 1rem;
+    width: 90%;
+}
+
+input:invalid {
+    border: 3px #ff2400 solid !important;
+}
