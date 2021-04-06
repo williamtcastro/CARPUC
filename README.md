@@ -17,8 +17,11 @@ O problema da pouca flexibilidade de horários dos ônibus, vem afetando no temp
 
 | Nome                      | Descrição     |
 | -------------             |:-------------:|
-| Condutor  | É a pessoa ou grupo de pessoas que tem como função de transportarem alunos do ponto A para o ponto B, pertencentes a Universidade Puc Minas Poços de caldas, que possuem Carteira de habilitação A I B |
-| Passageiro  | É a pessoa ou grupo de pessoas que necessitam de transporte para se locomoverem, sendo alunos matriculado na universidade de Puc Minas Poços de Caldas |
+| Adilson (Back-End)  | Desenvolvimento de arquitetura de dados, regras de negócio e validação de dados |
+| Pedro (Front-End)  | Desenvolvimento de páginas web e protótipos da plataforma |
+| Raony (Front-End)  | Desenvolvimento de páginas web e design do produto |
+| Renan (Back-End)  | Desenvolvimento da api de comunicação do site com o server |
+| William (Fullstack)  | Code-review, validação de funcionalidades e desenvolvimento de critical features |
 
 ## 3. Product Backlog
 
