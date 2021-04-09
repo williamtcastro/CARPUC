@@ -1,4 +1,10 @@
-![logo.png](docs/arts/logo.png)
+
+<center>
+
+![header](docs/arts/logo.png)
+
+</center>
+
 # PUCAR
 
 ## Equipe
@@ -19,6 +25,9 @@ O problema da pouca flexibilidade de horários dos ônibus, vem afetando no temp
 | -------------             |:-------------:|
 | Condutor  | É a pessoa ou grupo de pessoas que tem como função de transportarem alunos do ponto A para o ponto B, pertencentes a Universidade Puc Minas Poços de caldas, que possuem Carteira de habilitação A I B |
 | Passageiro  | É a pessoa ou grupo de pessoas que necessitam de transporte para se locomoverem, sendo alunos matriculado na universidade de Puc Minas Poços de Caldas |
+| Moderador  |  É a pessoa ou grupo de pessoas responsáveis por gerenciar e moderar os usuários do aplicativo, prezando pela neutralidade e buscando resolver possíveis problemas interpessoais. (Usuário experiente ou nomeado). |
+| Administrador  | É a pessoa ou o grupo de pessoas que possuem controle total sobre a plataforma, gerenciando o aplicativo e os moderadores.|
+
 
 ## 3. Product Backlog
 
