@@ -13,6 +13,7 @@
     "@unform/core": "^2.1.6",
     "@unform/web": "^2.1.6",
     "global": "^4.4.0",
+    "node-sass": "^5.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
@@ -47,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "@types/googlemaps": "^3.43.3",
     "@types/react-router-dom": "^5.1.7"
   }
 }
