@@ -44,7 +44,7 @@ const Login: React.FC = () => {
               Entrar
             </button>
           </Form>
-          <Link to="/logon" style={{ color: "#006494" }} className="custom-button-logon">
+          <Link to="/account/logon" style={{ color: "#006494" }} className="custom-button-logon">
             Cadastrar-se
           </Link>
         </div>
