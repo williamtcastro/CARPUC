@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/01d24b26-bc08-406f-aeaf-e6823deac31d/resourceGroups/PAMDA/providers/Microsoft.Web/sites/api-pamda",
+    "appService.deploySubpath": "."
+}
