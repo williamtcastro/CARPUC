@@ -19,7 +19,10 @@ module.exports = {
       });
 
       oldTokens.map(async (oldToken) => {
-        await Tokens.update({ status_token: 1 }, { where: { id: oldToken.id } });
+        await Tokens.update(
+          { status_token: 1 },
+          { where: { id: oldToken.id } },
+        );
       });
     }
 
@@ -141,11 +144,18 @@ module.exports = {
     // eslint-disable-next-line consistent-return
     transporter.sendMail(message, (error) => {
       if (error) {
-        return res.status(500).json({ status: false, message: 'Email couldn`t be sent' });
+        return res
+          .status(500)
+          .json({ status: false, message: 'Email couldn`t be sent' });
       }
     });
 
-    return res.status(200).json({ status: true, message: 'User Registered please confirm your account' });
+    return res
+      .status(200)
+      .json({
+        status: true,
+        message: 'User Registered please confirm your account',
+      });
   },
 
   async reset(req, res) {
@@ -155,18 +165,45 @@ module.exports = {
 
     const person = await Usuario.findByPk(id);
 
-    if (incomingPasswd === person.password) return res.status(400).json({ status: false, message: 'Try a diferent password than last time' });
+    if (incomingPasswd === person.password) {
+      return res
+        .status(400)
+        .json({
+          status: false,
+          message: 'Try a diferent password than last time',
+        });
+    }
 
-    if (person === null) return res.status(400).json({ status: false, message: 'User dosent exists' });
+    if (person === null) {
+      return res
+        .status(400)
+        .json({ status: false, message: 'User dosent exists' });
+    }
 
-    const passUpdate = await Usuario.update({ password: incomingPasswd }, { where: { id } });
+    const passUpdate = await Usuario.update(
+      { password: incomingPasswd },
+      { where: { id } },
+    );
 
-    if (passUpdate[0] !== 1) return res.status(500).json({ status: false, mesage: 'Unable to update password' });
+    if (passUpdate[0] !== 1) {
+      return res
+        .status(500)
+        .json({ status: false, mesage: 'Unable to update password' });
+    }
 
-    const tokenUpdate = await Tokens.update({ is_valid: 0 }, { where: { token } });
+    const tokenUpdate = await Tokens.update(
+      { is_valid: 0 },
+      { where: { token } },
+    );
 
-    if (tokenUpdate[0] !== 1) return res.status(500).json({ status: false, mesage: 'Unable to update token' });
+    if (tokenUpdate[0] !== 1) {
+      return res
+        .status(500)
+        .json({ status: false, mesage: 'Unable to update token' });
+    }
 
-    return res.status(200).json({ status: true, message: 'User password updated' });
+    return res
+      .status(200)
+      .json({ status: true, message: 'User password updated' });
   },
 };

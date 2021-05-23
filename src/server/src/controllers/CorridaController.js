@@ -3,10 +3,27 @@
 require('dotenv').config();
 
 const Carona = require('../models/caronas');
+const Usuario = require('../models/usuario');
+
+Carona.hasOne(Usuario, {
+  foreignKey: {
+    name: 'nome_completo',
+  },
+});
 
 module.exports = {
   async index(req, res) {
+    let query;
+    const { status } = req.query;
+    if (status === undefined) {
+      query = '';
+    } else {
+      query = { status_carona: status };
+    }
+
     const caronas = await Carona.findAll({
+      where: query,
+      order: [['id', 'desc']],
       attributes: { exclude: ['created_at', 'updated_at'] },
     });
 
@@ -32,7 +49,28 @@ module.exports = {
         .json({ status: false, message: 'Carona não existe' });
     }
 
-    return res.status(200).json({ status: true, message: carona });
+    const { condutor: cpf } = carona;
+
+    const user = await Usuario.findByPk(cpf, {
+      attributes: {
+        exclude: [
+          'created_at',
+          'updated_at',
+          'bio',
+          'tier',
+          'email',
+          'senha',
+          'genero',
+          'cpf',
+          'id',
+        ],
+      },
+    });
+
+    return res.status(200).json({
+      status: true,
+      message: { carona, condutor: user },
+    });
   },
 
   async store(req, res) {
@@ -87,7 +125,7 @@ module.exports = {
       {
         status_carona,
       },
-      { where: { id } },
+      { where: { id } }
     );
 
     if (a !== 1) {
