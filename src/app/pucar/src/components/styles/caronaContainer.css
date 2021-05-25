@@ -1,13 +1,107 @@
 .container-carona {
   display: flex;
+  flex: 1;
+  min-width: 100%;
   flex-direction: column;
   background-color: #f1f1f1;
   border-radius: 16px;
-  min-height: 150px;
   padding: 1rem;
   justify-content: center;
-  margin-bottom: 10px;
   box-shadow: 0px 0px 29px -12px rgba(0, 0, 0, 0.25);
   -webkit-box-shadow: 0px 0px 29px -12px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 0px 29px -12px rgba(0, 0, 0, 0.25);
+}
+
+.double-btn {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.divider {
+  background-color: #c0c0c0;
+  max-height: 0.3rem;
+  border-radius: 2rem;
+}
+
+.condutor-info {
+  display: flex;
+  flex: 1;
+}
+
+.condutor-info .condutor-info-details {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.picPlaceholder {
+  height: 50px;
+  width: 50px;
+  background-color: #212121;
+  border-radius: 50px;
+}
+
+.container-header {
+  margin-bottom: 1rem;
+}
+
+.container-header .info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.container-header .info .info-container {
+  margin-top: 1rem;
+  background-color: #ffffff;
+  border-radius: 16px;
+  display: flex;
+  flex: 1;
+  min-height: 9rem;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.info-container .saida {
+  color: #afd275;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.info-container .chegada {
+  color: #ef4b32;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.info-container .info-detail {
+  display: flex;
+  flex: 1;
+  padding: 1rem;
+}
+
+.info-container .info-detail .info-detail-hour {
+  display: flex;
+  flex: 1;
+  font-weight: bold;
+  font-size: 2rem;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+.text {
+  margin-left: 1rem;
+  font-size: 2.2rem;
+  font-weight: bold;
+}
+.mini-text {
+  margin-left: 1.5rem;
+  font-size: 1.6rem;
+  font-style: italic;
 }

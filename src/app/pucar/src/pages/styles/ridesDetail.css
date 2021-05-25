@@ -1,0 +1,109 @@
+.container-pages-detail {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  background-color: #f1f1f1;
+  padding: 2rem;
+  width: 100%;
+  margin-bottom: 8rem;
+}
+
+.caronadetail-condutor-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2rem;
+}
+
+.caronadetail-condutor-info .caronadetail-condutor-info-details {
+  display: flex;
+  flex: 1;
+  margin-top: 2rem;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.caronadetail-picPlaceholder {
+  height: 125px;
+  width: 125px;
+  background-color: #212121;
+  border-radius: 50%;
+}
+
+.caronadetail-container-header {
+  margin-bottom: 1rem;
+}
+
+.caronadetail-info {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+.caronadetail-info .caronadetail-info-container {
+  margin-top: 2rem;
+  background-color: #ffffff;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.caronadetail-info-container .caronadetail-saida {
+  color: #afd275;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.caronadetail-info-container .caronadetail-chegada {
+  color: #ef4b32;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.caronadetail-info-container .caronadetail-info-detail {
+  display: flex;
+  flex: 1;
+  padding: 1rem;
+}
+
+.caronadetail-info-container
+  .caronadetail-info-detail
+  .caronadetail-info-detail-hour {
+  display: flex;
+  flex: 1;
+  font-weight: bold;
+  font-size: 2rem;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+.caronadetail-text {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+.caronadetail-mini-text {
+  text-align: center;
+  font-size: 1.6rem;
+  font-style: italic;
+}
+
+@media (min-width: 720px) {
+  .container-pages-detail {
+    max-width: 1024px;
+    border-radius: 3rem 3rem 0 0;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+    margin-bottom: 0;
+    padding-bottom: 5rem;
+  }
+
+  .caronadetail-condutor-info {
+    padding-top: 0rem;
+  }
+}

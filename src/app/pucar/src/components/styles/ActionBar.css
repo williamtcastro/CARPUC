@@ -1,0 +1,38 @@
+.actionbar {
+  display: flex;
+  flex: 1;
+  height: 8rem;
+  width: 100%;
+  background-color: #1b98e0;
+  color: #f1f1f1;
+  font-weight: bold;
+  font-size: 2rem;
+  position: fixed;
+  bottom: 0;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 10000;
+}
+
+.action {
+    display: flex;
+    flex: 1;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+@media (min-width: 720px) {
+  .actionbar {
+    left: 50%;
+    height: 4rem;
+    border-radius: 5rem;
+    transform: translateX(-50%);
+    width: 50%;
+    max-width: 650px;
+    bottom: 1.5rem;
+    font-weight: 1.8rem;
+    height: 7rem;
+  }
+}

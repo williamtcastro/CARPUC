@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form } from "@unform/web";
 import Input from "../components/input";
 import Swal from "sweetalert2";
 
 import "./styles/login.css";
 import Logo from "../assets/img/PUCAR.png";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { getAuthSelector } from "../reducers/auth.slice";
 
 interface ILogon {
   name: string;
@@ -25,6 +27,15 @@ function handleSubmit(data: ILogon) {
 }
 
 const Logon: React.FC = () => {
+  const history = useHistory();
+  const auth = useSelector(getAuthSelector);
+
+  useEffect(() => {
+    if (auth.authStatus) {
+      history.push("/");
+    }
+  }, [auth.authStatus, history]);
+
   return (
     <div id="page-login">
       <div className="content-wrapper">
@@ -74,13 +85,13 @@ const Logon: React.FC = () => {
                 Criar Conta
               </button>
             </Form>
-              <Link
-                to="/account/login"
-                style={{ color: "#006494" }}
-                className="custom-button-logon"
-              >
-                Possui uma conta ?
-              </Link>
+            <Link
+              to="/account"
+              style={{ color: "#006494" }}
+              className="custom-button-logon"
+            >
+              Possui uma conta ?
+            </Link>
           </div>
         </div>
       </div>

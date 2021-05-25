@@ -32,12 +32,22 @@ const Caronas = db.define(
       },
     },
     embarque: {
-      type: DataTypes.STRING(70),
+      type: DataTypes.STRING,
       allowNull: false,
     },
     desembarque: {
-      type: DataTypes.STRING(70),
+      type: DataTypes.STRING,
       allowNull: false,
+    },
+    embarque_coordinates: {
+      type: DataTypes.STRING(70),
+      allowNull: true,
+      defaultValue: '0',
+    },
+    desembarque_coordinates: {
+      type: DataTypes.STRING(70),
+      allowNull: true,
+      defaultValue: '0',
     },
     embarque_horario: {
       type: DataTypes.DATE,

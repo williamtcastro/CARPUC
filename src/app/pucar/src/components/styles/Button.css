@@ -1,0 +1,18 @@
+.button {
+  display: flex;
+  flex: 1;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 7px;
+  font-size: 2rem;
+  cursor: pointer;
+  max-height: 5rem;
+}
+
+.button:hover,
+.button:focus {
+  -webkit-filter: brightness(85%);
+  filter: brightness(85%);
+}

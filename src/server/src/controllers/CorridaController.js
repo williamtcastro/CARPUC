@@ -2,14 +2,10 @@
 /* eslint-disable camelcase */
 require('dotenv').config();
 
+const Opencage = require('opencage-api-client');
+
 const Carona = require('../models/caronas');
 const Usuario = require('../models/usuario');
-
-Carona.hasOne(Usuario, {
-  foreignKey: {
-    name: 'nome_completo',
-  },
-});
 
 module.exports = {
   async index(req, res) {
@@ -27,13 +23,39 @@ module.exports = {
       attributes: { exclude: ['created_at', 'updated_at'] },
     });
 
+    const caronasList = [];
+
+    // eslint-disable-next-line array-callback-return
+    await Promise.all(
+      caronas.map(async (i) => {
+        const cpf = i.condutor;
+        const obj = {
+          id: i.id,
+          veiculo: i.veiculo,
+          condutor: i.condutor,
+          embarque: i.embarque,
+          embarque_coordinates: i.embarque_coordinates,
+          embarque_horario: i.embarque_horario,
+          desembarque: i.desembarque,
+          desembarque_coordinates: i.desembarque_coordinates,
+          desembarque_horario: i.desembarque_horario,
+          valor_carona_por_pessoa: i.valor_carona_por_pessoa,
+          status_carona: i.status_carona,
+          nome_completo: await Usuario.findByPk(cpf).then(
+            (r) => r.nome_completo
+          ),
+        };
+        caronasList.push(obj);
+      })
+    );
+
     if (caronas === null) {
       return res
         .status(500)
         .json({ status: false, message: 'Error while fetching caronas' });
     }
 
-    return res.status(200).json({ status: true, message: caronas });
+    return res.status(200).json({ status: true, message: caronasList });
   },
 
   async show(req, res) {
@@ -49,27 +71,24 @@ module.exports = {
         .json({ status: false, message: 'Carona não existe' });
     }
 
-    const { condutor: cpf } = carona;
+    const cpf = carona.condutor;
 
-    const user = await Usuario.findByPk(cpf, {
-      attributes: {
-        exclude: [
-          'created_at',
-          'updated_at',
-          'bio',
-          'tier',
-          'email',
-          'senha',
-          'genero',
-          'cpf',
-          'id',
-        ],
-      },
-    });
+    const caronaN = {
+      id: carona.id,
+      veiculo: carona.veiculo,
+      condutor: carona.condutor,
+      embarque: carona.embarque,
+      desembarque: carona.desembarque,
+      embarque_horario: carona.embarque_horario,
+      desembarque_horario: carona.desembarque_horario,
+      valor_carona_por_pessoa: carona.valor_carona_por_pessoa,
+      status_carona: carona.status_carona,
+      nome_completo: await Usuario.findByPk(cpf).then((r) => r.nome_completo),
+    };
 
     return res.status(200).json({
       status: true,
-      message: { carona, condutor: user },
+      message: caronaN,
     });
   },
 
@@ -103,13 +122,31 @@ module.exports = {
         .json({ status: false, message: 'Já existe uma carona ativa!' });
     }
 
+    const embarqueXY = await Opencage.geocode({ q: embarque })
+      .then((data) => {
+        const { results } = data;
+        const { lat, lng } = results[0].bounds.northeast;
+        return `${lat},${lng}`;
+      })
+      .catch(() => {});
+
+    const desembarqueXY = await Opencage.geocode({ q: desembarque })
+      .then((data) => {
+        const { results } = data;
+        const { lat, lng } = results[0].bounds.northeast;
+        return `${lat},${lng}`;
+      })
+      .catch(() => {});
+
     const newCarona = await Carona.create({
       veiculo,
       condutor: cpf,
       embarque,
-      desembarque,
       embarque_horario: newDate.getTime(),
+      embarque_coordinates: embarqueXY.toString(),
+      desembarque,
       desembarque_horario: newDate.getTime(),
+      desembarque_coordinates: desembarqueXY.toString(),
       valor_carona_por_pessoa,
       status_carona: 0,
     });

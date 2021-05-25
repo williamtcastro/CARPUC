@@ -28,6 +28,16 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+.bg-main {
+  display: flex;
+  flex: 1;
+  min-height: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
 input,
 button,
 textarea {
@@ -39,6 +49,8 @@ textarea {
 button {
   cursor: pointer;
 }
+
+
 
 @media (max-width: 759px) {
   html {
