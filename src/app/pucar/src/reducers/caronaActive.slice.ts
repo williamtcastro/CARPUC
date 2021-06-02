@@ -2,11 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { ICarona } from "./caronas.slice";
 
-interface ICaronaDetail extends ICarona {
-  is_active: boolean;
-}
-
-const initialState: ICaronaDetail = {
+const initialState: ICarona = {
   id: 0,
   veiculo: "",
   condutor: "",
@@ -19,21 +15,20 @@ const initialState: ICaronaDetail = {
   valor_carona_por_pessoa: 0,
   status_carona: 0,
   nome_completo: "",
-  is_active: false,
 };
 
-const caronasDetailSlice = createSlice({
-  name: "caronaDetail",
+const caronaActiveSlice = createSlice({
+  name: "caronaActive",
   initialState,
   reducers: {
-    setCaronaDetail: (state, action: PayloadAction<ICaronaDetail>) => {
+    setCaronaActive: (state, action: PayloadAction<ICarona>) => {
       return action.payload;
     },
   },
 });
 
-export const { setCaronaDetail } = caronasDetailSlice.actions;
+export const { setCaronaActive } = caronaActiveSlice.actions;
 
-export const getCaronaDetailSelector = (state: RootState) => state.caronaDetail;
+export const getCaronaActiveSelector = (state: RootState) => state.caronaActive;
 
-export default caronasDetailSlice.reducer;
+export default caronaActiveSlice.reducer;

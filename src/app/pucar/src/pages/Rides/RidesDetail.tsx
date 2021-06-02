@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Page from "../../components/Page";
+import Logo from "../../assets/img/PUCAR.png";
 import "../styles/ridesDetail.css";
 import { getCaronaDetailSelector } from "../../reducers/caronaDetail.slice";
 import GobackButton from "../../components/GobackButton";
@@ -9,17 +10,62 @@ import { midpoint } from "../../services/midpoint";
 import { RiUserReceivedLine, RiUserSharedLine } from "react-icons/ri";
 import Map from "../../components/Map";
 import Button from "../../components/Button";
-
-interface RouteParams {
-  id: string;
-}
+import { api } from "../../services/api";
+import Swal from "sweetalert2";
+import { getAuthSelector } from "../../reducers/auth.slice";
 
 const RidesDetail: React.FC = () => {
+  const auth = useSelector(getAuthSelector);
   const caronaDetail = useSelector(getCaronaDetailSelector);
   const history = useHistory();
   const [mapCenter, setMapCenter] = useState<Array<number>>([0, 0]);
   const [loading, setLoading] = useState<boolean>(true);
   const [depatureHour, setDepatureHour] = useState<Array<Date>>([]);
+  const statusCarona = ["", "FINALIZADA", "CANCELADA"];
+
+  const handleCancel = () => {
+    const url = `/passenger/${caronaDetail.id.toString()}`;
+
+    api
+      .put(
+        url,
+        { status_passageiro: 2 },
+        {
+          headers: {
+            "x-access-token": `${auth.token}`,
+          },
+        }
+      )
+      .then(() => {
+        Swal.fire("Sucesso", "Sua vaga foi cancelada!", "success");
+        history.push("/");
+      })
+      .catch(() => {
+        Swal.fire("Erro", "Falha no servidor!", "error");
+      });
+  };
+
+  const handleReserve = () => {
+    const url = `/passenger/${caronaDetail.id.toString()}`;
+
+    api
+      .post(
+        url,
+        {},
+        {
+          headers: {
+            "x-access-token": `${auth.token}`,
+          },
+        }
+      )
+      .then(() => {
+        Swal.fire("Sucesso", "Sua vaga foi requisitada!", "success");
+        history.push("/");
+      })
+      .catch(() => {
+        Swal.fire("Erro", "Você já tem uma carona ativa.", "error");
+      });
+  };
 
   useEffect(() => {
     const eH = new Date(caronaDetail.embarque_horario);
@@ -38,6 +84,9 @@ const RidesDetail: React.FC = () => {
   return (
     <Page>
       <GobackButton history={history} />
+      <div className="logo-wrapper">
+        <img src={Logo} alt="pucar" className="logo" />
+      </div>
       <div className="container-pages-detail">
         <div className="caronadetail-condutor-info">
           <div className="caronadetail-picPlaceholder">&nbsp;</div>
@@ -86,9 +135,43 @@ const RidesDetail: React.FC = () => {
           ""
         )}
         <div>
-          <Button color="#f1f1f1" backgroundColor="#1b98e0" margin="1rem 0 0 0">
-            RESERVAR LUGAR
-          </Button>
+          {caronaDetail.is_active ? (
+            <div onClick={handleCancel}>
+              <Button
+                color="#fdfdfd"
+                backgroundColor="#ef4b32"
+                margin="1rem 0 0 0"
+              >
+                CANCELAR LUGAR
+              </Button>
+            </div>
+          ) : caronaDetail.status_carona === 0 ? (
+            <div onClick={handleReserve}>
+              <Button
+                color="#fdfdfd"
+                backgroundColor="#1b98e0"
+                margin="1rem 0 0 0"
+              >
+                RESERVAR LUGAR
+              </Button>
+            </div>
+          ) : caronaDetail.status_carona === 1 ? (
+            <Button
+              color="#fdfdfd"
+              backgroundColor="#ff8000"
+              margin="1rem 0 0 0"
+            >
+              {statusCarona[caronaDetail.status_carona]}
+            </Button>
+          ) : (
+            <Button
+              color="#fdfdfd"
+              backgroundColor="#ef4b32"
+              margin="1rem 0 0 0"
+            >
+              {statusCarona[caronaDetail.status_carona]}
+            </Button>
+          )}
         </div>
       </div>
     </Page>

@@ -1,0 +1,25 @@
+.container-list-div {
+  max-height: 12rem;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-div-rides-list {
+  display: flex;
+  flex: 1;
+}
+
+.end {
+  justify-content: flex-end;
+  margin-right: 1rem;
+}
+
+.custom-rides-tag {
+  padding: 1rem;
+  border-radius: 1.6rem;
+  font-weight: bold;
+  color: #fefbfb;
+}

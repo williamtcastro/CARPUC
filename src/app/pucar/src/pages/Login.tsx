@@ -18,8 +18,8 @@ interface ILogin {
 
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
-  const history = useHistory();
   const auth = useSelector(getAuthSelector);
+  const history = useHistory();
 
   useEffect(() => {
     if (auth.authStatus) {
@@ -37,6 +37,7 @@ const Login: React.FC = () => {
           setAuth({
             authStatus: true,
             id: person.id,
+            cpf: person.cpf,
             bio: person.bio,
             token: token,
             celular: person.celular,

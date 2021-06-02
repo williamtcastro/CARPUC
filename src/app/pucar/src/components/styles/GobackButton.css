@@ -18,13 +18,13 @@
 }
 
 .icon-color {
-  color:#f1f1f1;
+  color:#fdfdfd;
 }
 
 
 @media (min-width: 600px) {
   .gobackbutton-container {
-    background-color: #f1f1f1;
+    background-color: #fdfdfd;
   }
 
   .icon-color {

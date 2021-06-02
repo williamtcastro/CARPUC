@@ -1,13 +1,13 @@
 import { Route, Switch } from "react-router-dom";
 import Home from "../pages/Home";
-import RidesDetail from "../pages/Rides/RidesDetail";
+import Rides from "./rides";
 
 export default function AppRoutes() {
 
   return (
     <Switch>
       <Route exact path={`/`} component={Home} />
-      <Route path={`/rides/:id`} component={RidesDetail} />
+      <Route path={`/rides`} component={Rides} />
     </Switch>
   );
 }

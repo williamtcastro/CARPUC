@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 
 import "./styles/caronaContainer.css";
-import Map from "./Map";
+// import Map from "./Map";
 import Button from "./Button";
 import { ICarona } from "../reducers/caronas.slice";
-import { midpoint } from "../services/midpoint";
+// import { midpoint } from "../services/midpoint";
 import { RiUserReceivedLine, RiUserSharedLine } from "react-icons/ri";
 import { setCaronaDetail } from "../reducers/caronaDetail.slice";
 import { Tooltip } from "react-tippy";
@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import { useAppDispatch } from "../store.hooks";
 
 const CaronaContainer: React.FC<ICarona> = (props: ICarona) => {
-  const [mapCenter, setMapCenter] = useState<Array<number>>([0, 0]);
+  // const [mapCenter, setMapCenter] = useState<Array<number>>([0, 0]);
   const [loading, setLoading] = useState<boolean>(true);
   const [depatureHour, setDepatureHour] = useState<Array<Date>>([]);
   const dispatch = useAppDispatch();
@@ -20,13 +20,13 @@ const CaronaContainer: React.FC<ICarona> = (props: ICarona) => {
   useEffect(() => {
     const eH = new Date(props.embarque_horario);
     const dH = new Date(props.desembarque_horario);
-    const { embarque_coordinates, desembarque_coordinates } = props;
-    const eC = embarque_coordinates.split(",");
-    const dC = desembarque_coordinates.split(",");
-    const mPX = midpoint(eC[0], dC[0]);
-    const mPY = midpoint(eC[1], dC[1]);
+    // const { embarque_coordinates, desembarque_coordinates } = props;
+    // const eC = embarque_coordinates.split(",");
+    // const dC = desembarque_coordinates.split(",");
+    // const mPX = midpoint(eC[0], dC[0]);
+    // const mPY = midpoint(eC[1], dC[1]);
     setDepatureHour([eH, dH]);
-    setMapCenter([mPX, mPY]);
+    // setMapCenter([mPX, mPY]);
     setLoading(false);
   }, [props]);
 
@@ -44,6 +44,7 @@ const CaronaContainer: React.FC<ICarona> = (props: ICarona) => {
       status_carona: props.status_carona,
       valor_carona_por_pessoa: props.valor_carona_por_pessoa,
       veiculo: props.veiculo,
+      is_active: false,
     }))
   };
 
@@ -97,7 +98,7 @@ const CaronaContainer: React.FC<ICarona> = (props: ICarona) => {
       {/* {loading ? "" : <Map center={[mapCenter[0], mapCenter[1]]} height="150px"/>} */}
       {/* <div className="double-btn">
         <Button
-          color="#f1f1f1"
+          color="#fdfdfd"
           backgroundColor="#afd275"
           onClick={handleClick}
           margin="0 0.5rem 0 0"
@@ -105,7 +106,7 @@ const CaronaContainer: React.FC<ICarona> = (props: ICarona) => {
           MAIS INFORMAÇÕES
         </Button>
         <Button
-          color="#f1f1f1"
+          color="#fdfdfd"
           backgroundColor="#ef4b32"
           onClick={handleClick}
           margin="0 0 0 0.5rem"
@@ -114,7 +115,7 @@ const CaronaContainer: React.FC<ICarona> = (props: ICarona) => {
         </Button>
       </div> */}
       <Link to={`/rides/${props.id}`} onClick={handleClick}>
-        <Button color="#f1f1f1" backgroundColor="#afd275" margin="1rem 0 0 0">
+        <Button color="#fdfdfd" backgroundColor="#afd275" margin="1rem 0 0 0">
           MAIS INFORMAÇÕES
         </Button>
       </Link>

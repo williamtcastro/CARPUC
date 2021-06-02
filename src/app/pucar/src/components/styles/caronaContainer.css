@@ -3,7 +3,7 @@
   flex: 1;
   min-width: 100%;
   flex-direction: column;
-  background-color: #f1f1f1;
+  background-color: #fdfdfd;
   border-radius: 16px;
   padding: 1rem;
   justify-content: center;
@@ -57,7 +57,7 @@
 
 .container-header .info .info-container {
   margin-top: 1rem;
-  background-color: #ffffff;
+  background-color: #f4f4f4;
   border-radius: 16px;
   display: flex;
   flex: 1;

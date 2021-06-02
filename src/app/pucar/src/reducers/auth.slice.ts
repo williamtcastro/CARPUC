@@ -4,6 +4,7 @@ import { RootState } from "../store";
 export interface IAuth {
   token: string;
   id: number;
+  cpf: string;
   nome_completo: string;
   email: string;
   celular: string;
@@ -16,6 +17,7 @@ export interface IAuth {
 const initialState: IAuth = {
   token: "",
   id: 0,
+  cpf: "",
   nome_completo: "",
   email: "",
   celular: "",

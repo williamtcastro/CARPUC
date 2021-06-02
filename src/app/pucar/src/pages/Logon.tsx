@@ -8,6 +8,9 @@ import Logo from "../assets/img/PUCAR.png";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getAuthSelector } from "../reducers/auth.slice";
+// import Radio from "../components/radio";
+import Select from "../components/select";
+import { api } from "../services/api";
 
 interface ILogon {
   name: string;
@@ -18,13 +21,12 @@ interface ILogon {
   genero: number;
 }
 
-function handleSubmit(data: ILogon) {
-  console.log(data);
-  Swal.fire({
-    title: data.name,
-    icon: "success",
-  });
-}
+const selectOptions = [
+  { value: "genero", label: "Gênero" },
+  { value: 0, label: "Masculino" },
+  { value: 1, label: "Feminino" },
+  { value: 2, label: "Outros" },
+];
 
 const Logon: React.FC = () => {
   const history = useHistory();
@@ -35,6 +37,21 @@ const Logon: React.FC = () => {
       history.push("/");
     }
   }, [auth.authStatus, history]);
+
+  const handleSubmit = (data: ILogon) => {
+    api
+      .post("/register", data)
+      .then(() => {
+        Swal.fire(
+          "Sucesso",
+          "Conta criada com sucesso! Acesse seu email para confirmar sua conta",
+          "success"
+        ).then(() => history.push("/account"));
+      })
+      .catch((e) => {
+        Swal.fire("Erro", e.toString(), "warning");
+      });
+  };
 
   return (
     <div id="page-login">
@@ -52,11 +69,28 @@ const Logon: React.FC = () => {
           <div>
             <Form onSubmit={handleSubmit} className="form-style">
               <Input
-                name="name"
+                name="nome"
                 styleInput="login"
                 placeholder="Nome completo"
                 type="text"
               />
+              <Select
+                name="genero"
+                label="Genero"
+                styleInput="login"
+                options={selectOptions}
+              >
+                {selectOptions.map((option) => (
+                  <option
+                    key={option.value}
+                    value={option.value}
+                    style={{ minWidth: "100%" }}
+                  >
+                    {option.label}
+                  </option>
+                ))}
+              </Select>
+              {/* <Radio name="genero" label="Genero" options={radioOptions} /> */}
               <Input
                 name="cpf"
                 styleInput="login"
@@ -76,7 +110,7 @@ const Logon: React.FC = () => {
                 type="email"
               />
               <Input
-                name="password"
+                name="senha"
                 styleInput="login"
                 placeholder="Senha"
                 type="password"
