@@ -30,6 +30,10 @@ app.use(express.urlencoded({ extended: true }));
 // app.use(morgan('dev'));
 
 app.use(routes);
-app.listen(process.env.PORT);
+const server = app.listen(process.env.PORT, () => {
+  const { port, address } = server.address();
 
-module.exports = app;
+  console.log('App listening at http://%s:%s', address, port);
+});
+
+module.exports = server;
