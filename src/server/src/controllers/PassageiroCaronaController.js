@@ -74,19 +74,20 @@ module.exports = {
     const { id_carona } = req.params;
     const { status_passageiro } = req.body;
 
-    const [a] = await PassageiroCarona.update(
+    // const [a] = await PassageiroCarona.update(
+    await PassageiroCarona.update(
       {
         status_passageiro,
       },
       { where: { id_carona } },
     );
 
-    if (a !== 1) {
-      return res.status(500).json({
-        status: false,
-        message: 'O Passageiro não foi atualizada!',
-      });
-    }
+    // if (Number(a) !== 2 || Number(a) !== 1) {
+    //   return res.status(500).json({
+    //     status: false,
+    //     message: 'O Passageiro não foi atualizada!',
+    //   });
+    // }
 
     return res
       .status(200)

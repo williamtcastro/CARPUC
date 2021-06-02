@@ -3,22 +3,31 @@
 require('dotenv').config();
 
 const Opencage = require('opencage-api-client');
+const { Op } = require('sequelize');
 
 const Carona = require('../models/caronas');
+const PassageiroCarona = require('../models/passageiro_carona');
 const Usuario = require('../models/usuario');
 
 module.exports = {
   async index(req, res) {
-    let query;
-    const { status } = req.query;
-    if (status === undefined) {
-      query = '';
-    } else {
-      query = { status_carona: status };
-    }
+    let query = '';
+    let querys = '';
+    const {
+      status, user, flag_u, flag_s,
+    } = req.query;
+
+    if (Number(flag_u) === 0) query = { [Op.ne]: user };
+    else query = { [Op.eq]: user };
+
+    if (Number(flag_s) === 0) querys = { [Op.ne]: status };
+    else querys = { [Op.eq]: status };
 
     const caronas = await Carona.findAll({
-      where: query,
+      where: {
+        status_carona: querys,
+        condutor: query,
+      },
       order: [['id', 'desc']],
       attributes: { exclude: ['created_at', 'updated_at'] },
     });
@@ -42,11 +51,11 @@ module.exports = {
           valor_carona_por_pessoa: i.valor_carona_por_pessoa,
           status_carona: i.status_carona,
           nome_completo: await Usuario.findByPk(cpf).then(
-            (r) => r.nome_completo
+            (r) => r.nome_completo,
           ),
         };
         caronasList.push(obj);
-      })
+      }),
     );
 
     if (caronas === null) {
@@ -56,6 +65,53 @@ module.exports = {
     }
 
     return res.status(200).json({ status: true, message: caronasList });
+  },
+
+  async active(req, res) {
+    const { cpf } = req.body;
+    const id = await PassageiroCarona.findOne(
+      {
+        where: {
+          passageiro: cpf,
+          status_passageiro: 0,
+        },
+      },
+      {
+        attributes: { exclude: ['created_at', 'updated_at'] },
+      },
+    )
+      .then((r) => r.id_carona)
+      .catch(() => res.status(400).json({ status: false, message: 'Não existe carona ativa' }));
+
+    if (id === null) {
+      return res
+        .status(400)
+        .json({ status: false, message: 'Não existe carona ativa' });
+    }
+
+    const carona = await Carona.findByPk(id, {
+      attributes: { exclude: ['created_at', 'updated_at'] },
+    });
+
+    const caronaN = {
+      id: carona.id,
+      veiculo: carona.veiculo,
+      condutor: carona.condutor,
+      embarque: carona.embarque,
+      desembarque: carona.desembarque,
+      embarque_horario: carona.embarque_horario,
+      desembarque_horario: carona.desembarque_horario,
+      desembarque_coordinates: carona.desembarque_coordinates,
+      embarque_coordinates: carona.embarque_coordinates,
+      valor_carona_por_pessoa: carona.valor_carona_por_pessoa,
+      status_carona: carona.status_carona,
+      nome_completo: await Usuario.findByPk(cpf).then((r) => r.nome_completo),
+    };
+
+    return res.status(200).json({
+      status: true,
+      message: caronaN,
+    });
   },
 
   async show(req, res) {
@@ -81,6 +137,8 @@ module.exports = {
       desembarque: carona.desembarque,
       embarque_horario: carona.embarque_horario,
       desembarque_horario: carona.desembarque_horario,
+      desembarque_coordinates: carona.desembarque_coordinates,
+      embarque_coordinates: carona.embarque_coordinates,
       valor_carona_por_pessoa: carona.valor_carona_por_pessoa,
       status_carona: carona.status_carona,
       nome_completo: await Usuario.findByPk(cpf).then((r) => r.nome_completo),
@@ -162,7 +220,7 @@ module.exports = {
       {
         status_carona,
       },
-      { where: { id } }
+      { where: { id } },
     );
 
     if (a !== 1) {

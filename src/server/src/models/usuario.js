@@ -22,7 +22,7 @@ const Usuario = db.define(
       primaryKey: true,
     },
     genero: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     senha: {
@@ -35,11 +35,11 @@ const Usuario = db.define(
       primaryKey: true,
     },
     celular: {
-      type: DataTypes.STRING(11),
+      type: DataTypes.STRING(25),
       allowNull: false,
     },
     tier: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     bio: {

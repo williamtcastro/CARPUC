@@ -56,7 +56,7 @@ module.exports = {
     }
 
     const person = await Usuario.findByPk(cpf, {
-      attributes: { exclude: ['senha', 'created_at', 'updated_at', 'cpf'] },
+      attributes: { exclude: ['senha', 'created_at', 'updated_at'] },
     });
 
     return res.status(200).json({ status: true, message: { token, person } });
