@@ -156,13 +156,14 @@ module.exports = {
       veiculo,
       embarque,
       desembarque,
-      // embarque_horario,
-      // desembarque_horario,
+      embarque_horario,
+      desembarque_horario,
       valor_carona_por_pessoa,
     } = req.body;
     let flag = false;
 
-    const newDate = new Date();
+    const newDate = new Date(embarque_horario);
+    const newDate2 = new Date(desembarque_horario);
 
     const oldCaronas = await Carona.findAll({
       where: { condutor: cpf, veiculo },
@@ -203,7 +204,7 @@ module.exports = {
       embarque_horario: newDate.getTime(),
       embarque_coordinates: embarqueXY.toString(),
       desembarque,
-      desembarque_horario: newDate.getTime(),
+      desembarque_horario: newDate2.getTime(),
       desembarque_coordinates: desembarqueXY.toString(),
       valor_carona_por_pessoa,
       status_carona: 0,

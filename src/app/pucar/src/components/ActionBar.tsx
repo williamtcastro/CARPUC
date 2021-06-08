@@ -31,7 +31,7 @@ const ActionBar: React.FC = () => {
         break;
 
       case 1:
-        // history.push("/ride/new");
+        history.push("/rides/new");
         break;
 
       case 2:
@@ -39,7 +39,7 @@ const ActionBar: React.FC = () => {
         break;
 
       case 3:
-        // history.push("/");
+        history.push("/profile");
         break;
 
       default:

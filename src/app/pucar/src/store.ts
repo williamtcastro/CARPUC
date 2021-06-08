@@ -6,6 +6,7 @@ import caronaDetail from "./reducers/caronaDetail.slice";
 import caronaActive from "./reducers/caronaActive.slice";
 import caronasList from "./reducers/caronasList.slice";
 import actionIndex from "./reducers/actionIndex.slice";
+import carrosList from "./reducers/carro.slice";
 import auth from "./reducers/auth.slice";
 
 const reducers = combineReducers({
@@ -15,12 +16,13 @@ const reducers = combineReducers({
   auth,
   actionIndex,
   caronaActive,
+  carrosList,
 });
 
 const persistConfig = {
   key: "pucar",
   storage,
-  blacklist: ["caronas", "caronaDetail", "caronasList", "caronaActive"],
+  blacklist: ["caronas", "caronaDetail", "caronasList", "caronaActive", "carrosList"],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

@@ -60,6 +60,11 @@ const RidesList: React.FC = () => {
       <div className="container-home">
         <div className="name-text">CORRIDAS ANTIGAS</div>
         <div>
+          {caronas.length === 0 ? (
+            <div className="form-style">Você não possui caronas antigas</div>
+          ) : (
+            <></>
+          )}
           {loading ? (
             caronas.map((carona) => {
               return (

@@ -137,6 +137,17 @@ const Home: React.FC = () => {
           <></>
         )}
 
+        {caronas.length === 0 ? (
+          <div
+            className="form-style"
+            style={{ padding: "1rem", textAlign: "center" }}
+          >
+            <h1>Não existem caronas disponiveis</h1>
+          </div>
+        ) : (
+          <></>
+        )}
+
         <div className="caronas-grid">
           {caronas.map((carona) => (
             <CaronaContainer
