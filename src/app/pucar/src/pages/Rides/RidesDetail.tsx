@@ -13,8 +13,11 @@ import Button from "../../components/Button";
 import { api } from "../../services/api";
 import Swal from "sweetalert2";
 import { getAuthSelector } from "../../reducers/auth.slice";
+import { useAppDispatch } from "../../store.hooks";
+import { setCaronaActive } from "../../reducers/caronaActive.slice";
 
 const RidesDetail: React.FC = () => {
+  const dispatch = useAppDispatch();
   const auth = useSelector(getAuthSelector);
   const caronaDetail = useSelector(getCaronaDetailSelector);
   const history = useHistory();
@@ -23,6 +26,63 @@ const RidesDetail: React.FC = () => {
   const [depatureHour, setDepatureHour] = useState<Array<Date>>([]);
   const statusCarona = ["", "FINALIZADA", "CANCELADA"];
 
+  const handleCancelCarona = () => {
+    const url = `/rides/${caronaDetail.id.toString()}`;
+
+    api
+      .put(
+        url,
+        { status_carona: 2 },
+        {
+          headers: {
+            "x-access-token": `${auth.token}`,
+          },
+        }
+      )
+      .then(() => {
+        Swal.fire("Sucesso", "Sua Carona foi cancelada!", "success");
+        dispatch(
+          setCaronaActive({
+            condutor: "",
+            desembarque: "",
+            desembarque_horario: "",
+            embarque: "",
+            embarque_horario: "",
+            id: 0,
+            status_carona: 0,
+            valor_carona_por_pessoa: 0,
+            veiculo: "",
+            desembarque_coordinates: "",
+            embarque_coordinates: "",
+            nome_completo: "",
+          })
+        );
+      })
+      .catch(() => {
+        Swal.fire("Erro", "Falha no servidor!", "error");
+      });
+  };
+
+  const handleFinishCarona = () => {
+    const url = `/rides/${caronaDetail.id.toString()}`;
+
+    api
+      .put(
+        url,
+        { status_carona: 1 },
+        {
+          headers: {
+            "x-access-token": `${auth.token}`,
+          },
+        }
+      )
+      .then(() => {
+        Swal.fire("Sucesso", "Sua Carona foi finalizada!", "success");
+      })
+      .catch(() => {
+        Swal.fire("Erro", "Falha no servidor!", "error");
+      });
+  };
   const handleCancel = () => {
     const url = `/passenger/${caronaDetail.id.toString()}`;
 
@@ -38,7 +98,6 @@ const RidesDetail: React.FC = () => {
       )
       .then(() => {
         Swal.fire("Sucesso", "Sua vaga foi cancelada!", "success");
-        history.push("/");
       })
       .catch(() => {
         Swal.fire("Erro", "Falha no servidor!", "error");
@@ -136,15 +195,38 @@ const RidesDetail: React.FC = () => {
         )}
         <div>
           {caronaDetail.is_active ? (
-            <div onClick={handleCancel}>
-              <Button
-                color="#fdfdfd"
-                backgroundColor="#ef4b32"
-                margin="1rem 0 0 0"
-              >
-                CANCELAR LUGAR
-              </Button>
-            </div>
+            caronaDetail.is_owner ? (
+              <div>
+                <div onClick={handleFinishCarona}>
+                  <Button
+                    color="#fdfdfd"
+                    backgroundColor="#ff8000"
+                    margin="1rem 0 0 0"
+                  >
+                    FINALIZAR CARONA
+                  </Button>
+                </div>
+                <div onClick={handleCancelCarona}>
+                  <Button
+                    color="#fdfdfd"
+                    backgroundColor="#ef4b32"
+                    margin="1rem 0 0 0"
+                  >
+                    CANCELAR CARONA
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              <div onClick={handleCancel}>
+                <Button
+                  color="#fdfdfd"
+                  backgroundColor="#ef4b32"
+                  margin="1rem 0 0 0"
+                >
+                  CANCELAR LUGAR
+                </Button>
+              </div>
+            )
           ) : caronaDetail.status_carona === 0 ? (
             <div onClick={handleReserve}>
               <Button

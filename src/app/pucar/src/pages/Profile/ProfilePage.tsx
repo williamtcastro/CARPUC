@@ -81,6 +81,7 @@ const ProfilePage: React.FC = () => {
         </Link>
         <Link
           to={`#`}
+          style={{ marginBottom: "8rem" }}
           className="container-carona container-list-div"
           onClick={() => {
             Swal.fire({

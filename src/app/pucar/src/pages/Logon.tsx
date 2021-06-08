@@ -39,6 +39,7 @@ const Logon: React.FC = () => {
   }, [auth.authStatus, history]);
 
   const handleSubmit = (data: ILogon) => {
+    Swal.fire("Aguarde", "", "warning");
     api
       .post("/register", data)
       .then(() => {

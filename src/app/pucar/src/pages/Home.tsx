@@ -30,8 +30,19 @@ const Home: React.FC = () => {
   const caronaActive = useSelector(getCaronaActiveSelector);
   const history = useHistory();
 
+  const caronasFiltered = caronas.filter(
+    (carona) => carona.condutor !== auth.cpf
+  );
+
+  const caronasFilteredM = caronas.filter(
+    (carona) => carona.condutor === auth.cpf && carona.status_carona === 0
+  );
+
+  const caronaOwner = caronasFilteredM[0];
+
   useEffect(() => {
     dispatch(setActionIndex({ index: 0 }));
+    setIsCaronaActive(false);
     api
       .get("/token", {
         headers: {
@@ -40,7 +51,7 @@ const Home: React.FC = () => {
       })
       .then(() => {
         api
-          .get(`/rides?status=0&user=${auth.cpf}&flag_u=0&flag_s=1`, {
+          .get(`/rides`, {
             headers: {
               "x-access-token": auth.token,
             },
@@ -75,7 +86,6 @@ const Home: React.FC = () => {
               })
               .then(({ data }) => {
                 const carona: ICarona = data.message;
-                console.log(carona);
                 dispatch(
                   setCaronaActive({
                     condutor: carona.condutor,
@@ -131,13 +141,39 @@ const Home: React.FC = () => {
               nome_completo={caronaActive.nome_completo}
               desembarque_coordinates={caronaActive.desembarque_coordinates}
               embarque_coordinates={caronaActive.embarque_coordinates}
+              is_active={false}
+              is_owner={false}
             />
           </div>
         ) : (
           <></>
         )}
 
-        {caronas.length === 0 ? (
+        {caronasFilteredM.length === 1 ? (
+          <div>
+            <CaronaActive
+              key={caronaOwner.id}
+              id={caronaOwner.id}
+              veiculo={caronaOwner.veiculo}
+              condutor={caronaOwner.condutor}
+              embarque={caronaOwner.embarque}
+              desembarque={caronaOwner.desembarque}
+              embarque_horario={caronaOwner.embarque_horario}
+              desembarque_horario={caronaOwner.desembarque_horario}
+              valor_carona_por_pessoa={caronaOwner.valor_carona_por_pessoa}
+              status_carona={caronaOwner.status_carona}
+              nome_completo={caronaOwner.nome_completo}
+              desembarque_coordinates={caronaOwner.desembarque_coordinates}
+              embarque_coordinates={caronaOwner.embarque_coordinates}
+              is_active={true}
+              is_owner={true}
+            />
+          </div>
+        ) : (
+          <></>
+        )}
+
+        {caronasFiltered.length === 0 ? (
           <div
             className="form-style"
             style={{ padding: "1rem", textAlign: "center" }}
@@ -149,7 +185,7 @@ const Home: React.FC = () => {
         )}
 
         <div className="caronas-grid">
-          {caronas.map((carona) => (
+          {caronasFiltered.map((carona) => (
             <CaronaContainer
               key={carona.id}
               id={carona.id}

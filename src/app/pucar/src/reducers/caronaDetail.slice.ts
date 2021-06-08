@@ -2,8 +2,9 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { ICarona } from "./caronas.slice";
 
-interface ICaronaDetail extends ICarona {
+export interface ICaronaDetail extends ICarona {
   is_active: boolean;
+  is_owner?: boolean;
 }
 
 const initialState: ICaronaDetail = {
@@ -20,6 +21,7 @@ const initialState: ICaronaDetail = {
   status_carona: 0,
   nome_completo: "",
   is_active: false,
+  is_owner: false,
 };
 
 const caronasDetailSlice = createSlice({

@@ -22,7 +22,7 @@ const reducers = combineReducers({
 const persistConfig = {
   key: "pucar",
   storage,
-  blacklist: ["caronas", "caronaDetail", "caronasList", "caronaActive", "carrosList"],
+  blacklist: ["caronas", "caronaDetail", "caronasList", "caronaActive"],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

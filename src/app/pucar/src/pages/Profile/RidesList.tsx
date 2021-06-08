@@ -19,10 +19,13 @@ const RidesList: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const auth = useSelector(getAuthSelector);
   const caronas = useSelector(getCaronasListSelector);
+  const caronasFiltered = caronas.filter(
+    (carona) => carona.condutor === auth.cpf && carona.status_carona !== 0
+  );
 
   useEffect(() => {
     api
-      .get(`/rides?status=0&user=${auth.cpf}&flag_u=0&flag_s=0`, {
+      .get(`/rides`, {
         headers: {
           "x-access-token": auth.token,
         },
@@ -60,13 +63,13 @@ const RidesList: React.FC = () => {
       <div className="container-home">
         <div className="name-text">CORRIDAS ANTIGAS</div>
         <div>
-          {caronas.length === 0 ? (
+          {caronasFiltered.length === 0 ? (
             <div className="form-style">Você não possui caronas antigas</div>
           ) : (
             <></>
           )}
           {loading ? (
-            caronas.map((carona) => {
+            caronasFiltered.map((carona) => {
               return (
                 <ListCarona
                   key={carona.id}

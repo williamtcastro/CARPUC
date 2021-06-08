@@ -2,12 +2,12 @@ import React from "react";
 
 import "./styles/ListCarona.css";
 
-import { ICarona } from "../reducers/caronas.slice";
+import { ICaronaDetail } from "../reducers/caronaDetail.slice";
 import { setCaronaDetail } from "../reducers/caronaDetail.slice";
 import { useAppDispatch } from "../store.hooks";
 import { Link } from "react-router-dom";
 
-const CaronaActive: React.FC<ICarona> = (props: ICarona) => {
+const CaronaActive: React.FC<ICaronaDetail> = (props: ICaronaDetail) => {
   const dispatch = useAppDispatch();
   // const dateInitial = new Date(props.desembarque_horario);
 
@@ -27,6 +27,7 @@ const CaronaActive: React.FC<ICarona> = (props: ICarona) => {
         valor_carona_por_pessoa: props.valor_carona_por_pessoa,
         veiculo: props.veiculo,
         is_active: true,
+        is_owner: props.is_owner,
       })
     );
   };
@@ -38,7 +39,7 @@ const CaronaActive: React.FC<ICarona> = (props: ICarona) => {
       onClick={handleClick}
       style={{
         color: "#fefbfb",
-        backgroundColor: "#b3e85f",
+        backgroundColor: props.is_owner ? "#ef4b32" : "#b3e85f",
       }}
     >
       <div
@@ -51,7 +52,7 @@ const CaronaActive: React.FC<ICarona> = (props: ICarona) => {
           fontWeight: "bold",
         }}
       >
-        CARONA ATIVA
+        {props.is_owner ? "CONDUTOR ATIVO": "CARONA ATIVA"}
       </div>
     </Link>
   );

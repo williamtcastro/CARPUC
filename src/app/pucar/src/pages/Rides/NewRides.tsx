@@ -12,6 +12,9 @@ import { addCarro, ICarro } from "../../reducers/carro.slice";
 import { useAppDispatch } from "../../store.hooks";
 
 import "../styles/ridesList.css";
+import { ICarona } from "../../reducers/caronas.slice";
+import Swal from "sweetalert2";
+import { setCaronaDetail } from "../../reducers/caronaDetail.slice";
 
 const NewRides: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -52,7 +55,59 @@ const NewRides: React.FC = () => {
       });
   }, [auth, dispatch]);
 
-  const handleSubmit = () => {};
+  const handleSubmit = (data: ICarona) => {
+    Swal.fire("Pedido enviado", "Sua carona está sendo registrada", "warning");
+    api
+      .post(
+        "/rides",
+        {
+          veiculo: data.veiculo,
+          embarque: data.embarque,
+          desembarque: data.desembarque,
+          valor_carona_por_pessoa: Number(data.valor_carona_por_pessoa),
+          embarque_horario: data.embarque_horario,
+          desembarque_horario: data.desembarque_horario,
+        },
+        {
+          headers: {
+            "x-access-token": auth.token,
+          },
+        }
+      )
+      .then(({ data }) => {
+        const m: ICarona = data.message;
+        Swal.fire("Sucesso", "Carona criada com sucesso", "success");
+        dispatch(
+          setCaronaDetail({
+            condutor: m.condutor,
+            desembarque: m.desembarque,
+            desembarque_coordinates: m.desembarque_coordinates,
+            desembarque_horario: m.desembarque_horario,
+            embarque: m.embarque,
+            embarque_coordinates: m.embarque_coordinates,
+            embarque_horario: m.embarque_horario,
+            id: m.id,
+            is_active: true,
+            is_owner: true,
+            nome_completo: m.nome_completo,
+            status_carona: m.status_carona,
+            valor_carona_por_pessoa: m.valor_carona_por_pessoa,
+            veiculo: m.veiculo,
+          })
+        );
+
+        setTimeout(() => {
+          history.push(`/rides/${data.id}`);
+        }, 300);
+      })
+      .catch(() =>
+        Swal.fire(
+          "Erro",
+          "ocorreu um erro verifique se não possui uma carona ativa",
+          "error"
+        )
+      );
+  };
 
   return (
     <Page>
@@ -83,33 +138,38 @@ const NewRides: React.FC = () => {
                 styleInput="login"
                 placeholder="Local de Embarque"
                 type="text"
+                required={true}
               />
               <Input
-                name="embarquehora"
+                name="embarque_horario"
                 styleInput="login"
                 placeholder="Horário de Embarque"
                 type="time"
+                required={true}
               />
               <Input
                 name="desembarque"
                 styleInput="login"
                 placeholder="Local de Desembarque"
                 type="text"
+                required={true}
               />
               <Input
-                name="desembarquehora"
+                name="desembarque_horario"
                 styleInput="login"
                 placeholder="Horário de Desembarque"
                 type="time"
+                required={true}
               />
               <Input
-                name="valorporpessoa"
+                name="valor_carona_por_pessoa"
                 styleInput="login"
                 placeholder="Valor por pessoa"
                 type="number"
                 min="0.00"
                 max="1000000000.00"
                 step="0.01"
+                required={true}
               />
               <Select
                 name="veiculo"
@@ -131,7 +191,7 @@ const NewRides: React.FC = () => {
                 ))}
               </Select>
               <button type="submit" className="custom-button-login">
-                Entrar
+                Criar corrida
               </button>
             </Form>
           )}
