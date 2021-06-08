@@ -1,0 +1,1258 @@
+_type: export
+__export_format: 4
+__export_date: 2021-06-08T20:34:28.900Z
+__export_source: insomnia.desktop.app:v2021.3.0
+resources:
+  - _id: req_07039b8919fc4c589295f4c993d7f05f
+    parentId: fld_741728cfd5014378befe1e36c6ee62d9
+    modified: 1622348549850
+    created: 1621125086935
+    url: "{{ _.host }}/register"
+    name: Create User
+    description: |-
+      ### REQUEST : `POST`
+
+      ##### AUTH : `USER JWT TOKEN`
+
+      ##### URL : `/register`
+
+      ##### HEADER
+      | HEADER TYPE	   	  | VALUE                         	|
+      |----------------  	|-------------------------------	|
+      | Content-Type      | application/json              	|
+
+      ##### BODY : `JSON`
+
+      | ID          	| Type    	    	  | Content                       	|
+      |-------------	|----------------  	|-------------------------------	|
+      | name        	| String    	      | User Name                      	|
+      | email       	| String           	| User Email                     	|
+      | senha     	| String     	      | User Password                  	|
+      | cpf    	| String    	      | User Document                   |
+      | celular       	| String           	| User Phone                     	|
+      | genero       	| String           	| User Gender                    	|
+
+      ------
+
+      ### RESPONSE
+
+      ##### CODE : `200 (OK)` 
+
+      ##### BODY : `JSON`
+
+      | ID          	| Type    	| Content                       	|
+      |-------------	|---------	|-------------------------------	|
+      | status        | Boolean  	| Request Status                 	|
+      | message      	| String  	| Response Message                |
+    method: POST
+    body:
+      mimeType: application/json
+      text: >-
+        {
+        	"nome": "William de Castro",
+        	"email": "{% gerarEmail 'email.test.', true, 1, 9999, '', 'pucar.com.br' %}",
+        	"senha": "123456",
+        	"cpf": "{% geradorDeCPF false %}",
+        	"celular": "{% gerarNumeroTelefone false, false, 0, true, 0 %}",
+        	"genero": 1
+        }
+    parameters: []
+    headers:
+      - id: pair_7e09553396f148b9834082504e730e31
+        name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1608845429185.4375
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_741728cfd5014378befe1e36c6ee62d9
+    parentId: wrk_39a6acd5b6ce48458aa35ed1222d32fb
+    modified: 1623184451993
+    created: 1621470197948
+    name: Usuario
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1621126291244.125
+    _type: request_group
+  - _id: wrk_39a6acd5b6ce48458aa35ed1222d32fb
+    parentId: null
+    modified: 1621125086817
+    created: 1621125086817
+    name: PUCAR
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_7bfc517e03e344e49410265f1a2ee3f2
+    parentId: fld_741728cfd5014378befe1e36c6ee62d9
+    modified: 1622601362988
+    created: 1621125086941
+    url: "{{ _.remote }}/login"
+    name: Login
+    description: >-
+      ### REQUEST : `GET`
+
+
+      ##### AUTH : `NODE REQUIRED`
+
+
+      ##### URL : `/login`
+
+
+      ##### HEADER
+
+      | HEADER TYPE	   	  | VALUE                         	|
+
+      |----------------  	|-------------------------------	|
+
+      | Content-Type      | application/json              	|
+
+
+      ##### BODY : `JSON`
+
+
+      | ID          	| Type    	    	  | Content                       	|
+
+      |-------------	|----------------  	|-------------------------------	|
+
+      | email       	| String           	| User Email                     	|
+
+      | senha     	| String     	      | User Password                  	|
+
+
+      ------
+
+
+      ### RESPONSE
+
+
+      ##### CODE : `200 (OK)` 
+
+
+      ##### BODY : `JSON`
+
+
+      | ID          	| Type    	    | Content                       	|
+
+      |-------------	|-------------	|-------------------------------	|
+
+      | status        | Boolean  	    | Request Status                 	|
+
+      | message      	| JSON Array  	| Response Message                |
+
+      | - token       | String  	    | User JWT Token                  |
+
+      | - person    	| JSON Array  	| User Details                    |
+
+      | -- id        	| String      	| User ID                         |
+
+      | -- nome_completo       | String      	| User name                       |
+
+      | -- email     	| String  	    | User e-mail                     |
+
+      | -- celular     	| String  	    | User phone                     |
+
+      | -- tier   | Int      	| User tier                   |
+
+      | -- genero | Int 	    | User gender                |
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "willbilljobs@gmail.com",
+        	"senha": "123456"
+        }
+    parameters: []
+    headers:
+      - id: pair_12a1dc1461a84bb58f6c16d5ebb829ef
+        name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1608845429135.4375
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_358e909e9dff4b2ca31dfc7d06b4d48c
+    parentId: fld_2ac61298fbe8438a8b709003681ae38f
+    modified: 1623183968888
+    created: 1621126784870
+    url: "{{ _.remote }}/token"
+    name: Validate Token
+    description: |-
+      ### REQUEST : `GET`
+
+      ##### AUTH : `NODE REQUIRED`
+
+      ##### URL : `/login`
+
+      ##### HEADER
+      | HEADER TYPE	   	  | VALUE                         	|
+      |----------------  	|-------------------------------	|
+      | Content-Type      | application/json              	|
+
+      ##### BODY : `NONE`
+
+      ------
+
+      ### RESPONSE
+
+      ##### CODE : `200 (OK)` 
+
+      ##### BODY : `JSON`
+
+      | ID          	| Type    	    | Content                       	|
+      |-------------	|-------------	|-------------------------------	|
+      | status        | Boolean  	    | Request Status                 	|
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: "{{ _.header_token }}"
+        value: "{{ _.token }}"
+        description: ""
+        id: pair_89c0811aa9494d2f836a6553e591a6fb
+    authentication: {}
+    metaSortKey: -1596220660322.875
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_2ac61298fbe8438a8b709003681ae38f
+    parentId: wrk_39a6acd5b6ce48458aa35ed1222d32fb
+    modified: 1623184447910
+    created: 1621470219362
+    name: Token
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1621126291253.5
+    _type: request_group
+  - _id: req_d37a253ecd2143fa9c15fd4583ec7ca5
+    parentId: fld_02f58ac7ac004143a3ca10af10d934d1
+    modified: 1623184087853
+    created: 1621470242525
+    url: "{{ _.host }}/cars"
+    name: Index Cars
+    description: |-
+      ### REQUEST : `GET`
+
+      ##### AUTH : `USER JWT TOKEN`
+
+      ##### URL : `/cars`
+
+      ##### HEADER
+      | HEADER TYPE	   	  | VALUE              	|
+      |----------------  	|--------------------	|
+      | x-access-token    | JWT Token          	|
+
+      ##### BODY : `NONE RIQUIRED`
+
+      ---
+
+      ### RESPONSE
+
+      ##### CODE : `200 (OK)` 
+
+      ##### BODY : `JSON ARRAY`
+
+      | ID          	| Type    	|
+      |-------------	|---------	|
+      | id          	| Integer  	|
+      | placa        	| String  	|
+      | marca_modelo 	| String   	|
+      | ano    	| Integer   	| 
+      | cor       	| String	  | 
+      | condutor   	| String  	| 
+      | assentos_disponiveis   	| Integer  	|
+      | createdAt    	| String   	|
+      | updatedAt   	| String   	|
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: "{{ _.header_token }}"
+        value: "{{ _.token }}"
+        description: ""
+        id: pair_11f99a6e2231488bb94ff66bcc5f1f45
+    authentication: {}
+    metaSortKey: -1595875914999.75
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_02f58ac7ac004143a3ca10af10d934d1
+    parentId: wrk_39a6acd5b6ce48458aa35ed1222d32fb
+    modified: 1623184444831
+    created: 1621470228387
+    name: Carros
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1621126291266
+    _type: request_group
+  - _id: req_3d4c8ba1a7c44f6f945d5b1302abf03d
+    parentId: fld_02f58ac7ac004143a3ca10af10d934d1
+    modified: 1623184071974
+    created: 1621470375607
+    url: "{{ _.host }}/cars/oxi5017"
+    name: Index One Car
+    description: |
+      ### REQUEST : `GET`
+
+      ##### AUTH : `USER JWT TOKEN`
+
+      ##### URL : `/cars/placa`
+
+      ##### HEADER
+      | HEADER TYPE	   	  | VALUE              	|
+      |----------------  	|--------------------	|
+      | x-access-token    | JWT Token          	|
+
+      ##### BODY : `NONE RIQUIRED`
+
+      ---
+
+      ### RESPONSE 
+
+      ##### CODE : `200 (OK)`
+
+      ##### BODY : `JSON`
+
+      | ID          	| Type    	|
+      |-------------	|---------	|
+      | id          	| Integer  	|
+      | placa        	| String  	|
+      | marca_modelo 	| String   	|
+      | ano    	| Integer   	| 
+      | cor       	| String	  | 
+      | condutor   	| String  	| 
+      | assentos_disponiveis   	| Integer  	|
+      | createdAt    	| String   	|
+      | updatedAt   	| String   	|
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: "{{ _.header_token }}"
+        value: "{{ _.token }}"
+        description: ""
+        id: pair_12898eb3fd0148d698f718aac8100a3a
+    authentication: {}
+    metaSortKey: -1595875914949.75
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_1e1bcae56d1344a9a3d05c2b7a0d671d
+    parentId: fld_02f58ac7ac004143a3ca10af10d934d1
+    modified: 1623184114258
+    created: 1621470499644
+    url: "{{ _.remote }}/cars"
+    name: Create Car
+    description: |-
+      ### REQUEST : `POST`
+
+      ##### AUTH : `USER JWT TOKEN`
+
+      ##### URL : `/cars`
+
+      ##### HEADER
+      | HEADER TYPE	   	  | VALUE                         	|
+      |----------------  	|-------------------------------	|
+      | Content-Type      | multipart/form-data            	|
+      | x-access-token    | JWT Token                      	|
+
+      ##### BODY : `JSON`
+
+      | ID          	| Type    	|
+      |-------------	|---------	|
+      | id          	| Integer  	|
+      | placa        	| String  	|
+      | marca_modelo 	| String   	|
+      | ano    	| Integer   	| 
+      | cor       	| String	  | 
+      | condutor   	| String  	| 
+      | assentos_disponiveis   	| Integer  	|
+
+      ---
+
+      ### RESPONSE
+
+      ##### CODE : `200 (OK)` 
+
+      ##### BODY : `JSON`
+
+      | ID          	| Type    	|
+      |-------------	|---------	|
+      | id          	| Integer  	|
+      | placa        	| String  	|
+      | marca_modelo 	| String   	|
+      | ano    	| Integer   	| 
+      | cor       	| String	  | 
+      | condutor   	| String  	| 
+      | assentos_disponiveis   	| Integer  	|
+      | createdAt    	| String   	|
+      | updatedAt   	| String   	|
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"placa": "ixi2312",
+        	"marca_modelo": "Yamaha/Fazer 150",
+        	"ano": 2014,
+        	"cor": "Vermelha",
+        	"assentos_disponiveis": 1
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        description: ""
+        id: pair_28f604118f43448384b9aab01b917bc6
+      - description: ""
+        id: pair_3d88e76653214c89936b5600b6714731
+        name: "{{ header_token }}"
+        value: "{{token}}"
+    authentication:
+      disabled: false
+      password: ""
+      type: basic
+      username: ""
+    metaSortKey: -1595875915049.75
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_2a5d565f2cdb47b1b10767ae61a7ff84
+    parentId: fld_02f58ac7ac004143a3ca10af10d934d1
+    modified: 1621471433006
+    created: 1621471367448
+    url: "{{ host  }}/cars/oxi5017"
+    name: Delete Car
+    description: |
+      ### REQUEST : `DELETE`
+
+      ##### AUTH : `USER JWT TOKEN`
+
+      ##### URL : `/cars/placa`
+
+      ##### HEADER
+      | HEADER TYPE	   	  | VALUE              	|
+      |----------------  	|--------------------	|
+      | x-access-token    | JWT Token          	|
+
+      ##### BODY : `NONE RIQUIRED`
+
+      ---
+
+      ### RESPONSE
+
+      ##### CODE : `200 (OK)` 
+
+      ##### BODY : `JSON`
+
+      | ID          | Content                 	|
+      |-----------	|-------------------------	|
+      | status  	  | Veiculo excluido          |
+    method: DELETE
+    body: {}
+    parameters: []
+    headers:
+      - description: ""
+        id: pair_4dad0628dea94a85983a09f7372f00c8
+        name: "{{ header_token }}"
+        value: "{{ token }}"
+    authentication: {}
+    metaSortKey: -1595875915099.75
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_8dc058830a4d4b919abb40be957ffb79
+    parentId: fld_02f58ac7ac004143a3ca10af10d934d1
+    modified: 1621472712747
+    created: 1621472394807
+    url: "{{ host }}/cars/oxi5017"
+    name: Update Car
+    description: >-
+      ### REQUEST : `POST`
+
+
+      ##### AUTH : `USER JWT TOKEN`
+
+
+      ##### URL : `/cars`
+
+
+      ##### HEADER
+
+      | HEADER TYPE	   	  | VALUE                         	|
+
+      |----------------  	|-------------------------------	|
+
+      | Content-Type      | multipart/form-data            	|
+
+      | x-access-token    | JWT Token                      	|
+
+
+      ##### BODY : `MULTI-PART FORM`
+
+
+      | ID          	              | Type    	    	  | Content                       	|
+
+      |-------------              	|----------------  	|-------------------------------	|
+
+      | assentos_disponiveis      	| Text    	        | Assentos Disponiveis           	|
+
+
+      ---
+
+
+      ### RESPONSE
+
+
+      ##### CODE : `200 (OK)` 
+
+
+      ##### BODY : `JSON`
+
+
+      | ID          	| Type    	| Content                       	|
+
+      |-------------	|---------	|-------------------------------	|
+
+      | status       	| Boolean  	| Return Status                  	|
+
+      | message      	| String  	| Return Message                 	|
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"assentos_disponiveis": 3
+        }
+    parameters: []
+    headers:
+      - id: pair_74dd09aab946403284111f1b2e0d3fbd
+        name: Content-Type
+        value: application/json
+      - description: ""
+        id: pair_3d88e76653214c89936b5600b6714731
+        name: "{{ header_token }}"
+        value: "{{token}}"
+    authentication:
+      disabled: false
+      password: ""
+      type: basic
+      username: ""
+    metaSortKey: -1595875915149.75
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e1db8c0a602147b6bee6726c032fa251
+    parentId: fld_9f79529b74584ba0886bb46cc5a959da
+    modified: 1623184225562
+    created: 1621544987644
+    url: "{{ _.host }}/rides"
+    name: Index Caronas
+    description: |
+      ### REQUEST : `GET`
+
+      ##### AUTH : `USER JWT TOKEN`
+
+      ##### URL : `/rides`
+
+      ##### HEADER
+      | HEADER TYPE	   	  | VALUE              	|
+      |----------------  	|--------------------	|
+      | x-access-token    | JWT Token          	|
+
+      ##### BODY : `NONE RIQUIRED`
+
+      ---
+
+      ### RESPONSE
+
+      ##### CODE : `200 (OK)` 
+
+      ##### BODY : `JSON ARRAY`
+
+      | ID          	| Type    	| Content                       	|
+      |-------------	|---------	|-------------------------------	|
+      | id          	| Integer  	| Product id                    	|
+      | veiculo        	| String  	| Product Name                  	|
+      | condutor 	| String   	| Product Description           	|
+      | embarque    	| String   	| Product Image (default size)  	|
+      | desembarque       	| Integer	  | Product Price (must be cents) 	|
+      | embarque_horario   	| String  	| Product URL path              	|
+      | desembarque_horario   	| String  	| Product URL path              	|
+      | embarque_coordinates   	| String  	| Product URL path              	|
+      | desembarque_coordinates   	| String  	| Product URL path              	|
+      | valor_carona_por_pessoa   	| String  	| Product URL path              	|
+      | status_carona   	| String  	| Product URL path              	|
+      | nome_completo   	| String  	| Product URL path              	|
+      | createdAt    	| String   	| Product Created Date          	|
+      | updatedAt   	| String   	| Product Updated Date          	|
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: "{{ _.header_token }}"
+        value: "{{ _.token }}"
+        description: ""
+        id: pair_11f99a6e2231488bb94ff66bcc5f1f45
+    authentication: {}
+    metaSortKey: -1595875914996.625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_9f79529b74584ba0886bb46cc5a959da
+    parentId: wrk_39a6acd5b6ce48458aa35ed1222d32fb
+    modified: 1623184440482
+    created: 1621544968572
+    name: Caronas
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1621126291291
+    _type: request_group
+  - _id: req_0d9cbbadcc0849febbdad321ca6365f5
+    parentId: fld_9f79529b74584ba0886bb46cc5a959da
+    modified: 1623184214963
+    created: 1621546790862
+    url: "{{ _.host }}/rides/14"
+    name: Index One Ride
+    description: |
+      ### REQUEST : `GET`
+
+      ##### AUTH : `USER JWT TOKEN`
+
+      ##### URL : `/rides/id`
+
+      ##### HEADER
+      | HEADER TYPE	   	  | VALUE              	|
+      |----------------  	|--------------------	|
+      | x-access-token    | JWT Token          	|
+
+      ##### BODY : `NONE RIQUIRED`
+
+      ---
+
+      ### RESPONSE 
+
+      ##### CODE : `200 (OK)`
+
+      ##### BODY : `JSON`
+
+      | ID          	| Type    	| Content                       	|
+      |-------------	|---------	|-------------------------------	|
+      | id          	| Integer  	| Product id                    	|
+      | veiculo        	| String  	| Product Name                  	|
+      | condutor 	| String   	| Product Description           	|
+      | embarque    	| String   	| Product Image (default size)  	|
+      | desembarque       	| Integer	  | Product Price (must be cents) 	|
+      | embarque_horario   	| String  	| Product URL path              	|
+      | desembarque_horario   	| String  	| Product URL path              	|
+      | embarque_coordinates   	| String  	| Product URL path              	|
+      | desembarque_coordinates   	| String  	| Product URL path              	|
+      | valor_carona_por_pessoa   	| String  	| Product URL path              	|
+      | status_carona   	| String  	| Product URL path              	|
+      | nome_completo   	| String  	| Product URL path              	|
+      | createdAt    	| String   	| Product Created Date          	|
+      | updatedAt   	| String   	| Product Updated Date          	|
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: "{{ _.header_token }}"
+        value: "{{ _.token }}"
+        description: ""
+        id: pair_12898eb3fd0148d698f718aac8100a3a
+    authentication: {}
+    metaSortKey: -1595875914946.625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_053180a7ceed49c29fa59066e9a91ade
+    parentId: fld_9f79529b74584ba0886bb46cc5a959da
+    modified: 1623184280678
+    created: 1621547057802
+    url: "{{ _.remote }}/rides"
+    name: Create Rides
+    description: |
+      ### REQUEST : `POST`
+
+      ##### AUTH : `USER JWT TOKEN`
+
+      ##### URL : `/rides`
+
+      ##### HEADER
+      | HEADER TYPE	   	  | VALUE                         	|
+      |----------------  	|-------------------------------	|
+      | Content-Type      | multipart/form-data            	|
+      | x-access-token    | JWT Token                      	|
+
+      ##### BODY : `JSON`
+
+      | ID          	| Type    	    	  | Content                       	|
+      |-------------	|----------------  	|-------------------------------	|
+      | product      	| Text    	        | Product Name                  	|
+      | description 	| Multiline Text   	| Product Description           	|
+      | file        	| File     	        | Product Image (default size)  	|
+      | price       	| Text  	          | Product Price (must be cents) 	|
+      | to_detail   	| Text    	        | Product URL path              	|
+
+      ---
+
+      ### RESPONSE
+
+      ##### CODE : `200 (OK)` 
+
+      ##### BODY : `JSON`
+
+
+      | ID          	| Type    	| Content                       	|
+      |-------------	|---------	|-------------------------------	|
+      | id          	| Integer  	| Product id                    	|
+      | veiculo        	| String  	| Product Name                  	|
+      | embarque    	| String   	| Product Image (default size)  	|
+      | desembarque       	| Integer	  | Product Price (must be cents) 	|
+      | embarque_horario   	| String  	| Product URL path              	|
+      | desembarque_horario   	| String  	| Product URL path              	|
+      | valor_carona_por_pessoa   	| String  	| Product URL path              	|
+      | createdAt    	| String   	| Product Created Date          	|
+      | updatedAt   	| String   	| Product Updated Date          	|
+    method: POST
+    body:
+      mimeType: application/json
+      text: >-
+        {
+        	"veiculo": "hfh3465",
+        	"embarque": "305, Rua Juscelino Barbosa, Aparecida, Poços de Caldas",
+        	"desembarque": "1503, Av. Padre Cletus Francis Cox, 1479 - Country Club, Poços de Caldas - MG",
+        	"valor_carona_por_pessoa": 3
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        description: ""
+        id: pair_28f604118f43448384b9aab01b917bc6
+      - description: ""
+        id: pair_3d88e76653214c89936b5600b6714731
+        name: "{{ header_token }}"
+        value: "{{token}}"
+    authentication:
+      disabled: false
+      password: ""
+      type: basic
+      username: ""
+    metaSortKey: -1595875915046.625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_ee26a461a8334fcc90926e3c01ec8430
+    parentId: fld_9f79529b74584ba0886bb46cc5a959da
+    modified: 1623184300145
+    created: 1621548034277
+    url: "{{ host  }}/rides/2"
+    name: Delete Rides
+    description: |
+      ### REQUEST : `DELETE`
+
+      ##### AUTH : `USER JWT TOKEN`
+
+      ##### URL : `/rides/id`
+
+      ##### HEADER
+      | HEADER TYPE	   	  | VALUE              	|
+      |----------------  	|--------------------	|
+      | x-access-token    | JWT Token          	|
+
+      ##### BODY : `NONE RIQUIRED`
+
+      ---
+
+      ### RESPONSE
+
+      ##### CODE : `200 (OK)` 
+
+      ##### BODY : `JSON`
+
+      | ID          | Content                 	|
+      |-----------	|-------------------------	|
+      | status  	  | Carona excluida          |
+    method: DELETE
+    body: {}
+    parameters: []
+    headers:
+      - description: ""
+        id: pair_4dad0628dea94a85983a09f7372f00c8
+        name: "{{ header_token }}"
+        value: "{{ token }}"
+    authentication: {}
+    metaSortKey: -1595875915096.625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_802295703aa6443b867c7ed23fbaa626
+    parentId: fld_9f79529b74584ba0886bb46cc5a959da
+    modified: 1623184401183
+    created: 1621549085287
+    url: "{{ host }}/rides/3"
+    name: Update Rides
+    description: |-
+      ### REQUEST : `POST`
+
+      ##### AUTH : `USER JWT TOKEN`
+
+      ##### URL : `/rides`
+
+      ##### HEADER
+      | HEADER TYPE	   	  | VALUE                         	|
+      |----------------  	|-------------------------------	|
+      | Content-Type      | multipart/form-data            	|
+      | x-access-token    | JWT Token                      	|
+
+      ##### BODY : `JSON`
+
+      | ID          	              | Type    	    	  | 
+      |-------------              	|----------------  	|
+      | status_carona      	| String    	        |
+
+      ---
+
+      ### RESPONSE
+
+      ##### CODE : `200 (OK)` 
+
+      ##### BODY : `JSON`
+
+      | ID          	| Type    	| 
+      |-------------	|---------	|
+      | status       	| Boolean  	|
+      | message      	| String  	|
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"status_carona": 2
+        }
+    parameters: []
+    headers:
+      - id: pair_74dd09aab946403284111f1b2e0d3fbd
+        name: Content-Type
+        value: application/json
+      - description: ""
+        id: pair_3d88e76653214c89936b5600b6714731
+        name: "{{ header_token }}"
+        value: "{{token}}"
+    authentication:
+      disabled: false
+      password: ""
+      type: basic
+      username: ""
+    metaSortKey: -1595875915146.625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_872c1ec0578749d1a05d7c572e9eb5db
+    parentId: fld_9f79529b74584ba0886bb46cc5a959da
+    modified: 1623184233144
+    created: 1622528675423
+    url: "{{ _.host }}/rides/active"
+    name: Index Active
+    description: |+
+      ### REQUEST : `GET`
+
+      ##### AUTH : `USER JWT TOKEN`
+
+      ##### URL : `/rides/id`
+
+      ##### HEADER
+      | HEADER TYPE	   	  | VALUE              	|
+      |----------------  	|--------------------	|
+      | x-access-token    | JWT Token          	|
+
+      ##### BODY : `NONE RIQUIRED`
+
+      ---
+
+      ### RESPONSE 
+
+      ##### CODE : `200 (OK)`
+
+      ##### BODY : `JSON`
+
+
+      | ID          	| Type    	| Content                       	|
+      |-------------	|---------	|-------------------------------	|
+      | id          	| Integer  	| Product id                    	|
+      | veiculo        	| String  	| Product Name                  	|
+      | condutor 	| String   	| Product Description           	|
+      | embarque    	| String   	| Product Image (default size)  	|
+      | desembarque       	| Integer	  | Product Price (must be cents) 	|
+      | embarque_horario   	| String  	| Product URL path              	|
+      | desembarque_horario   	| String  	| Product URL path              	|
+      | embarque_coordinates   	| String  	| Product URL path              	|
+      | desembarque_coordinates   	| String  	| Product URL path              	|
+      | valor_carona_por_pessoa   	| String  	| Product URL path              	|
+      | status_carona   	| String  	| Product URL path              	|
+      | nome_completo   	| String  	| Product URL path              	|
+      | createdAt    	| String   	| Product Created Date          	|
+      | updatedAt   	| String   	| Product Updated Date          	|
+
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: "{{ _.header_token }}"
+        value: "{{ _.token }}"
+        description: ""
+        id: pair_12898eb3fd0148d698f718aac8100a3a
+    authentication: {}
+    metaSortKey: -1595875915021.625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_18583157a1334851b3a1e1686fb6ef81
+    parentId: fld_04d774e206284684b761581170f1b139
+    modified: 1623183894705
+    created: 1621554345711
+    url: "{{ _.host }}/passanger/15"
+    name: Index Passageiros
+    description: |-
+      ### REQUEST : `GET`
+
+      ##### AUTH : `USER JWT TOKEN`
+
+      ##### URL : `/rides/id`
+
+      ##### HEADER
+      | HEADER TYPE	   	  | VALUE              	|
+      |----------------  	|--------------------	|
+      | x-access-token    | JWT Token          	|
+
+      ##### BODY : `NONE RIQUIRED`
+
+      ---
+
+      ### RESPONSE
+
+      ##### CODE : `200 (OK)` 
+
+      ##### BODY : `JSON ARRAY`
+
+      | ID          	| Type    	| 
+      |-------------	|---------	|
+      | id          	| Integer  	|
+      | passageiro      	| String  	|
+      | id_carona 	| Integer   	| 
+      | status_passageiro      	| Integer   	| 
+      | createdAt    	| String   	| 
+      | updatedAt   	| String   	| 
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: "{{ _.header_token }}"
+        value: "{{ _.token }}"
+        description: ""
+        id: pair_11f99a6e2231488bb94ff66bcc5f1f45
+    authentication: {}
+    metaSortKey: -1595875914995.0625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_04d774e206284684b761581170f1b139
+    parentId: wrk_39a6acd5b6ce48458aa35ed1222d32fb
+    modified: 1623184450626
+    created: 1621554330150
+    name: Passageiros
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1621126291247.25
+    _type: request_group
+  - _id: req_b3b8ac27c60044a29f86da6f0c9f738e
+    parentId: fld_04d774e206284684b761581170f1b139
+    modified: 1623184426132
+    created: 1621554590324
+    url: "{{ _.host }}/rides/15/p"
+    name: Create Passenger
+    description: |-
+      ### REQUEST : `POST`
+
+      ##### AUTH : `USER JWT TOKEN`
+
+      ##### URL : `/passanger/id_carona/`
+
+      ##### HEADER
+      | HEADER TYPE	   	  | VALUE                         	|
+      |----------------  	|-------------------------------	|
+      | x-access-token    | JWT Token                      	|
+
+      ##### BODY : `NONE REQUIRED`
+      ---
+
+      ### RESPONSE
+
+      ##### CODE : `200 (OK)` 
+
+      ##### BODY : `JSON`
+
+      | ID          	| Type    	|
+      |-------------	|---------	|
+      | id          	| Integer  	|
+      | passageiro      	| String  	|
+      | id_carona 	| Integer   	| 
+      |status_passageiro | Integer |
+      | createdAt    	| String   	| 
+      | updatedAt   	| String   	| 
+    method: POST
+    body: {}
+    parameters: []
+    headers:
+      - description: ""
+        id: pair_3d88e76653214c89936b5600b6714731
+        name: "{{ header_token }}"
+        value: "{{token}}"
+    authentication:
+      disabled: false
+      password: ""
+      type: basic
+      username: ""
+    metaSortKey: -1595875914945.0625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_083d9c5372fb499ab0a1661f08c25115
+    parentId: fld_04d774e206284684b761581170f1b139
+    modified: 1623184385059
+    created: 1621554700522
+    url: "{{ host }}/passenger/15"
+    name: Update Passageiros
+    description: |-
+      ### REQUEST : `POST`
+
+      ##### AUTH : `USER JWT TOKEN`
+
+      ##### URL : `/rides`
+
+      ##### HEADER
+      | HEADER TYPE	   	  | VALUE                         	|
+      |----------------  	|-------------------------------	|
+      | Content-Type      | multipart/form-data            	|
+      | x-access-token    | JWT Token                      	|
+
+      ##### BODY : `JSON`
+
+      | ID          	              | Type    	    	  | 
+      |-------------              	|----------------  	|
+      | status_passageiro      	| String    	        | 
+
+      ---
+
+      ### RESPONSE
+
+      ##### CODE : `200 (OK)` 
+
+      ##### BODY : `JSON`
+
+      | ID          	| Type    	| Content                       	|
+      |-------------	|---------	|-------------------------------	|
+      | status       	| Boolean  	| Return Status                  	|
+      | message      	| String  	| Return Message                 	|
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"status_passageiro": 0
+        }
+    parameters: []
+    headers:
+      - id: pair_74dd09aab946403284111f1b2e0d3fbd
+        name: Content-Type
+        value: application/json
+      - description: ""
+        id: pair_3d88e76653214c89936b5600b6714731
+        name: "{{ header_token }}"
+        value: "{{token}}"
+    authentication:
+      disabled: false
+      password: ""
+      type: basic
+      username: ""
+    metaSortKey: -1595875914895.0625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_8c1c84c37b864d5b91d8603bb1dcfd03
+    parentId: fld_04d774e206284684b761581170f1b139
+    modified: 1623183772261
+    created: 1621554997096
+    url: "{{ host  }}/rides/3/p/6"
+    name: Delete Passageiro
+    description: |
+      ### REQUEST : `DELETE`
+
+      ##### AUTH : `USER JWT TOKEN`
+
+      ##### URL : `/rides/id`
+
+      ##### HEADER
+      | HEADER TYPE	   	  | VALUE              	|
+      |----------------  	|--------------------	|
+      | x-access-token    | JWT Token          	|
+
+      ##### BODY : `NONE RIQUIRED`
+
+      ---
+
+      ### RESPONSE
+
+      ##### CODE : `200 (OK)` 
+
+      ##### BODY : `JSON`
+
+      | ID          | Content                 	|
+      |-----------	|-------------------------	|
+      | message  	  | Passageiro excluido          |
+    method: DELETE
+    body: {}
+    parameters: []
+    headers:
+      - description: ""
+        id: pair_4dad0628dea94a85983a09f7372f00c8
+        name: "{{ header_token }}"
+        value: "{{ token }}"
+    authentication: {}
+    metaSortKey: -1595875915045.0625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_2324fd9457854e4b864b902b473749c6
+    parentId: wrk_39a6acd5b6ce48458aa35ed1222d32fb
+    modified: 1623167835159
+    created: 1621125086825
+    name: Base Environment
+    data:
+      host: http://10.0.1.10:3333
+      remote: https://pucar-api.herokuapp.com
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IndpbGxiaWxsam9ic0BnbWFpbC5jb20iLCJpYXQiOjE2MjMxMTgzODV9.y-clvzOc1oXxVQ2xO7Syq8SaULAFqRNyaXuWL_TlEpg
+      header_token: x-access-token
+    dataPropertyOrder:
+      "&":
+        - host
+        - remote
+        - token
+        - header_token
+    color: null
+    isPrivate: false
+    metaSortKey: 1593476801659
+    _type: environment
+  - _id: jar_14d835caccb34ac39319276ef1f35798
+    parentId: wrk_39a6acd5b6ce48458aa35ed1222d32fb
+    modified: 1621127045536
+    created: 1621125086840
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_cf07a3670c0e48568bf781980fd4c52c
+    parentId: wrk_39a6acd5b6ce48458aa35ed1222d32fb
+    modified: 1621125087053
+    created: 1621125086848
+    fileName: PUCAR
+    contents: ""
+    contentType: yaml
+    _type: api_spec

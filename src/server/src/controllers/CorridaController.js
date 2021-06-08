@@ -3,7 +3,7 @@
 require('dotenv').config();
 
 const Opencage = require('opencage-api-client');
-const { Op } = require('sequelize');
+// const { Op } = require('sequelize');
 
 const Carona = require('../models/caronas');
 const PassageiroCarona = require('../models/passageiro_carona');
@@ -11,23 +11,21 @@ const Usuario = require('../models/usuario');
 
 module.exports = {
   async index(req, res) {
-    let query = '';
-    let querys = '';
-    const {
-      status, user, flag_u, flag_s,
-    } = req.query;
+    // let query = '';
+    // let querys = '';
+    // const { status, user, flag_u, flag_s } = req.query;
 
-    if (Number(flag_u) === 0) query = { [Op.ne]: user };
-    else query = { [Op.eq]: user };
+    // if (Number(flag_u) === 0) query = { [Op.ne]: user };
+    // else query = { [Op.eq]: user };
 
-    if (Number(flag_s) === 0) querys = { [Op.ne]: status };
-    else querys = { [Op.eq]: status };
+    // if (Number(flag_s) === 0) querys = { [Op.ne]: status };
+    // else querys = { [Op.eq]: status };
 
     const caronas = await Carona.findAll({
-      where: {
-        status_carona: querys,
-        condutor: query,
-      },
+      // where: {
+      //   status_carona: querys,
+      //   condutor: query,
+      // },
       order: [['id', 'desc']],
       attributes: { exclude: ['created_at', 'updated_at'] },
     });
@@ -55,7 +53,7 @@ module.exports = {
           ),
         };
         caronasList.push(obj);
-      }),
+      })
     );
 
     if (caronas === null) {
@@ -78,10 +76,14 @@ module.exports = {
       },
       {
         attributes: { exclude: ['created_at', 'updated_at'] },
-      },
+      }
     )
       .then((r) => r.id_carona)
-      .catch(() => res.status(400).json({ status: false, message: 'Não existe carona ativa' }));
+      .catch(() =>
+        res
+          .status(400)
+          .json({ status: false, message: 'Não existe carona ativa' })
+      );
 
     if (id === null) {
       return res
@@ -162,8 +164,22 @@ module.exports = {
     } = req.body;
     let flag = false;
 
-    const newDate = new Date(embarque_horario);
-    const newDate2 = new Date(desembarque_horario);
+    const newDate = new Date();
+
+    const newDateE = new Date(
+      newDate.getFullYear(),
+      newDate.getMonth(),
+      newDate.getDay(),
+      embarque_horario.split(':')[0],
+      embarque_horario.split(':')[1],
+    );
+    const newDateD = new Date(
+      newDate.getFullYear(),
+      newDate.getMonth(),
+      newDate.getDay(),
+      desembarque_horario.split(':')[0],
+      desembarque_horario.split(':')[1],
+    );
 
     const oldCaronas = await Carona.findAll({
       where: { condutor: cpf, veiculo },
@@ -201,10 +217,10 @@ module.exports = {
       veiculo,
       condutor: cpf,
       embarque,
-      embarque_horario: newDate.getTime(),
+      embarque_horario: newDateE.getTime(),
       embarque_coordinates: embarqueXY.toString(),
       desembarque,
-      desembarque_horario: newDate2.getTime(),
+      desembarque_horario: newDateD.getTime(),
       desembarque_coordinates: desembarqueXY.toString(),
       valor_carona_por_pessoa,
       status_carona: 0,
@@ -221,7 +237,7 @@ module.exports = {
       {
         status_carona,
       },
-      { where: { id } },
+      { where: { id } }
     );
 
     if (a !== 1) {
