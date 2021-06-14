@@ -9,11 +9,6 @@
 - nodemailer
 - multer
 
-### Dev dependece
-
-- chai
-- mocha
-
 # Para inicar como dev
 
 Digite o comando: `yarn` para instalar os pacotes

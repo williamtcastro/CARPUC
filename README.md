@@ -5,7 +5,11 @@
 
 </center>
 
-# PUCAR
+# PUCAR (Paralisado)
+
+## Status do Projeto
+
+Projeto concluido pelo o momento, fique a vontade de criar um fork ou modificar ele a sua visão
 
 ## Equipe
 
@@ -29,7 +33,7 @@ O problema da pouca flexibilidade de horários dos ônibus, vem afetando no temp
 | Administrador  | É a pessoa ou o grupo de pessoas que possuem controle total sobre a plataforma, gerenciando o aplicativo e os moderadores.|
 
 
-## 3. Product Backlog
+<!-- ## 3. Product Backlog
 
 _O product backlog é basicamente uma lista priorizada de requisitos, estórias, features ou restrições. Coisas que o cliente ou usuário deseja descritas utilizando a terminologia do ambiente de negócios cliente ou usuário. Ele deverá conter no mínimo dez (10) estórias  de valor priorizadas pela sua importância._
 
@@ -45,6 +49,6 @@ _O product backlog é basicamente uma lista priorizada de requisitos, estórias,
 | 8  |  Sistema de reembolso | Alta | Como usuário e passageiro, gostaria de ter a opção de emitir reembolso de uma corrida que não foi bem sucedida. | O sistema de reembolso poderá ser emitido pelo usuário no caso de alguma corrida que não foi bem sucedida. | [PROTÓTIPO]("../../../../../../../../../docs/prototipos/baixa/reembolso.png") |
 | 9  |  Encerramento de corrida | Alta | Como usuário, passageiro e condutor, gostaria de encerrar uma corrida. | O encerramento de corrida deve ser emitido pelo usuário caso bem sucedida. | [PROTÓTIPO]("../../../../../../../../../docs/prototipos/baixa/corrida_andamento.png") |
 | 10 |  Cancelamento de corrida | Alta | Como usuário, passageiro e condutor, gostaria de cancelar uma corrida caso surja algum empecilho. | O cancelamento de corrida deve ser solicitado pelo usuário. | [PROTÓTIPO]("../../../../../../../../../docs/prototipos/baixa/corrida_andamento.png") |
-
+ -->
 
 ****
