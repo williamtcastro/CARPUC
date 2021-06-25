@@ -5,6 +5,36 @@
 
 </center>
 
+# PUCAR (Paralyzed)
+
+## Project Status
+
+Project completed for the moment, feel free to create a fork or modify it to your vision
+
+## Team
+
+* Adilson Antônio Pereira Junior
+* Pedro Augusto Costa Senciano
+* Raony Lino de Oliveira
+* Renan Ferreira Meira
+* William de Castro
+
+## 1. Vision
+
+The problem of little flexibility in bus schedules has affected the waiting time of students who do not have vehicles to get around. Thus impacting the monthly cost of the student for transportation, as the solution would be to request a vehicle for applications, considering that the cost of this request would be high, related to the urban cost. In this context, a successful solution would result in low cost for transportation, in addition to reduced waiting time, bringing flexibility and safety, also benefiting the driver, creating a monthly income to help with spending.
+
+## 2. Involved
+
+| Name | Description |
+| ------------- |:-------------:|
+| Driver | It is the person or group of people whose function is to transport students from point A to point B, belonging to the Puc Minas Poços de caldas University, who have a driver's license A I B |
+| Passenger | It is the person or group of people who need transport to get around, being students enrolled at the University of Puc Minas Poços de Caldas |
+| Moderator | It is the person or group of people responsible for managing and moderating the application's users, striving for neutrality and seeking to resolve possible interpersonal problems. (Experienced or named user). |
+| Administrator | It is the person or group of people who have full control over the platform, managing the application and moderators.|
+
+
+-------------------------------------------------------------------------------------
+
 # PUCAR (Paralisado)
 
 ## Status do Projeto
